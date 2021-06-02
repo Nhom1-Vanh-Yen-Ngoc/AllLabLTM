@@ -1,0 +1,77 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Bai6;
+
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Scanner;
+
+/**
+ *
+ * @author Van Anh
+ */
+public class DoctorHash {
+
+    private static HashMap<String, DoctorDetails> elements;
+
+    public DoctorHash() {
+        elements = new HashMap<>();
+    }
+
+    public void Add() {
+        Scanner Scanner = new Scanner(System.in);
+        String code, name, specialization;
+        int availability;
+        System.out.print("Nhập code: ");
+        code = Scanner.nextLine();
+        System.out.print("Nhập tên: ");
+        name = Scanner.nextLine();
+        System.out.print("Nhập chuyên môn: ");
+        specialization = Scanner.nextLine();
+         System.out.print("Nhập giờ làm việc:");
+        availability = Scanner.nextInt();
+        DoctorDetails doctorDetails = new DoctorDetails(code, name,
+                specialization, availability);
+        getElements().put(doctorDetails.code, doctorDetails);
+    }
+
+    public void Search() {
+        Scanner Scanner = new Scanner(System.in);
+        System.out.print("Nhập code cần tìm: ");
+        String code = Scanner.nextLine();
+        if (getElements().containsKey(code) == false) {
+            System.out.println("Không tìm thấy dữ liệu!");
+        } else {
+            System.out.println("Thông tin bác sỹ tìm thấy:");
+            System.out.println(getElements().get(code).toString());
+    }
+    }
+    public void ShowAll() {
+        System.out.println("*******Thông tin tất cả bác sỹ***********");
+        Iterator it = getElements().entrySet().iterator();
+        int index = 1;
+        while (it.hasNext()) {
+            System.out.println("Bác sỹ " + index);
+            HashMap.Entry entry = (HashMap.Entry) it.next();
+            System.out.println(entry.getValue().toString() + "\n");
+            index++;
+        }
+    }
+
+    /**
+     * @return the elements
+     */
+    public static HashMap<String, DoctorDetails> getElements() {
+        return elements;
+    }
+
+    /**
+     * @param aElements the elements to set
+     */
+    public static void setElements(HashMap<String, DoctorDetails> aElements) {
+        elements = aElements;
+    }
+}
